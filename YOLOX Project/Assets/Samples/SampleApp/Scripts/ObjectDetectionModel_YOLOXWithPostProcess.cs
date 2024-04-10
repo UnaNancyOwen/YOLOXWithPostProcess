@@ -55,10 +55,10 @@ namespace HoloLab.DNN.ObjectDetection
         {
             var output_tensors = Predict(image);
 
-            var output_name = runtime_model.outputs[0];
+            var output_name = runtime_model.outputs[0].name;
             var output_tensor = output_tensors[output_name] as TensorFloat;
 
-            output_tensor.MakeReadable();
+            output_tensor.CompleteOperationsAndDownload();
             var output_span = output_tensor.ToReadOnlySpan();
 
             var objects = new List<HoloLab.DNN.ObjectDetection.Object>();
